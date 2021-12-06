@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  db:
+  db_amt_auth:
     image: postgres
     environment:
       - POSTGRES_DB=${POSTGRES_DB:-amt_auth}
