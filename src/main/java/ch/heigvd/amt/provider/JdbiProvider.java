@@ -4,6 +4,8 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
+
+import ch.heigvd.amt.models.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.jdbi.v3.postgres.PostgresPlugin;
@@ -17,6 +19,7 @@ public class JdbiProvider {
   @Inject
   public JdbiProvider(DataSource dataSource) {
     jdbi = Jdbi.create(dataSource).installPlugin(new PostgresPlugin());
+    jdbi.registerRowMapper(ConstructorMapper.factory(User.class));
     jdbi.registerArrayType(String.class, "TEXT");
   }
 
