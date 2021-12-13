@@ -4,6 +4,7 @@ import ch.heigvd.amt.database.UpdateResult;
 import ch.heigvd.amt.database.UpdateResultHandler;
 import ch.heigvd.amt.models.User;
 import ch.heigvd.amt.utils.ResourceLoader;
+import io.quarkus.elytron.security.common.BcryptUtil;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import org.jdbi.v3.core.Jdbi;
@@ -34,6 +35,8 @@ public class UserService {
               handle
                   .createUpdate(ResourceLoader.loadResource("sql/user/add.sql"))
                   .bind("username", user.getUsername())
+                  .bind("password", BcryptUtil.bcryptHash(user.getPassword()))
+                  .bind("role", "MEMBER")
                   .execute());
     } catch (UnableToExecuteStatementException e) {
       return updateResultHandler.handleUpdateError(e);

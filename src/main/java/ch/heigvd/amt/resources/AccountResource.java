@@ -3,7 +3,6 @@ package ch.heigvd.amt.resources;
 import ch.heigvd.amt.database.UpdateStatus;
 import ch.heigvd.amt.models.User;
 import ch.heigvd.amt.services.UserService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import javax.enterprise.context.ApplicationScoped;
