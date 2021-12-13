@@ -1,12 +1,10 @@
 package ch.heigvd.amt.models;
 
-import org.jdbi.v3.core.mapper.Nested;
-
 import java.beans.ConstructorProperties;
 
 public class User {
 
-    enum Role {
+    public enum Role {
         MEMBER, ADMIN
     }
 
@@ -15,10 +13,15 @@ public class User {
     private final Role role;
 
     @ConstructorProperties({"username", "password", "role"})
-    public User(String username, String password, @Nested("role") Role role) {
+    public User(String username, String password, Role role) {
         this.username = username;
         this.password = password;
         this.role = role;
+    }
+
+    @ConstructorProperties({"username", "password"})
+    public User(String username, String password) {
+        this(username, password, Role.MEMBER);
     }
 
     public String getUsername() {
