@@ -5,6 +5,4 @@ import javax.ws.rs.Path;
 
 @Path("/auth")
 @ApplicationScoped
-public class AuthResource {
-
-}
+public class AuthResource {}

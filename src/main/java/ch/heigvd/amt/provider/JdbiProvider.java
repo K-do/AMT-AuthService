@@ -1,11 +1,10 @@
 package ch.heigvd.amt.provider;
 
+import ch.heigvd.amt.models.User;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import javax.sql.DataSource;
-
-import ch.heigvd.amt.models.User;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.mapper.reflect.ConstructorMapper;
 import org.jdbi.v3.postgres.PostgresPlugin;
