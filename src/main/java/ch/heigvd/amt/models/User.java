@@ -1,7 +1,6 @@
 package ch.heigvd.amt.models;
 
 import java.beans.ConstructorProperties;
-import org.jdbi.v3.core.mapper.reflect.ColumnName;
 
 public class User {
 
@@ -14,14 +13,14 @@ public class User {
   private final String password;
   private final Role role;
 
-  public User(String username, @ColumnName("password") String password, Role role) {
+  public User(String username, String password, Role role) {
     this.username = username;
     this.password = password;
     this.role = role;
   }
 
   @ConstructorProperties({"username", "password"})
-  public User(String username, @ColumnName("password") String password) {
+  public User(String username, String password) {
     this(username, password, Role.MEMBER);
   }
 
@@ -29,7 +28,6 @@ public class User {
     return username;
   }
 
-  @ColumnName("password")
   public String getPassword() {
     return password;
   }

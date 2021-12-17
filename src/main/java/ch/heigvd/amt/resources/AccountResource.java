@@ -14,6 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/** */
 @Path("/accounts")
 @ApplicationScoped
 public class AccountResource {
@@ -31,6 +32,10 @@ public class AccountResource {
     this.userService = userService;
   }
 
+  /**
+   * @param receivedUser
+   * @return
+   */
   @POST
   @Path("/register")
   @Consumes(MediaType.APPLICATION_JSON)

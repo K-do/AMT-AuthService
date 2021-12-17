@@ -7,7 +7,6 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.quarkus.elytron.security.common.BcryptUtil;
 import io.smallrye.jwt.algorithm.SignatureAlgorithm;
 import io.smallrye.jwt.build.Jwt;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -17,6 +16,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+/** */
 @Path("/auth")
 @ApplicationScoped
 public class AuthResource {
@@ -29,6 +29,10 @@ public class AuthResource {
     this.userService = userService;
   }
 
+  /**
+   * @param receivedUser
+   * @return
+   */
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
@@ -47,7 +51,8 @@ public class AuthResource {
 
         // Creation of the JWT
         String jwt =
-        Jwt.issuer("AMT-AuthService").groups(userLoggingIn.getRole().toString())
+            Jwt.issuer("AMT-AuthService")
+                .groups(userLoggingIn.getRole().toString())
                 .jws()
                 .algorithm(SignatureAlgorithm.ES256)
                 .sign();
