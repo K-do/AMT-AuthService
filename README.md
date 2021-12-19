@@ -38,15 +38,16 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
 1. Cloner le repository. 
 
 2. Mettre en place la base de données
+   
    Dans les deux cas ci-dessous, Liquibase se charge de la création de la base de données et des tables qu'elle contient au lancement du projet Quarkus.
    
-   - Standalone
+   - **Standalone**
 
-   Si vous disposez déjà de postgres, vous pouvez créer une nouvelle base de données ou en utiliser une existante.
+      Si vous disposez déjà de postgres, vous pouvez créer une nouvelle base de données ou en utiliser une existante.
 
-   Une fois la configuration terminée, vous pouvez mettre les informations de connexions dans le fichier `config/application.properties`. (L'utilisateur à fournir doit avoir des droits de lecture et d'écriture)
+      Une fois la configuration terminée, vous pouvez mettre les informations de connexions dans le fichier `config/application.properties`. (L'utilisateur à fournir doit avoir des droits de lecture et d'écriture)
 
-   - Docker
+   - **Docker**
      1. `docker-compose up` dans le dossier `docker`
      2. Se connecter à la base de données dans l'IDE
 
