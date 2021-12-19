@@ -59,7 +59,7 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
    openssl pkcs8 -topk8 -nocrypt -inform pem -in ec256-key-pair.pem -outform pem -out privateKey.pem
    ```
 
-   Cela va permettre signer le JWT avec l'algorithme ES256.
+   Cela va permettre de signer le JWT avec l'algorithme ES256.
 
    La clé nommée `ec256-key-pair.pem` peut être supprimée ou cachée.
 
