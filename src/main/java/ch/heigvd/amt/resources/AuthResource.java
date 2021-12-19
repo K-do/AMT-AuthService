@@ -16,12 +16,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/** */
+/** Class allowing to treat requests from the application server when a member tries to log in */
 @Path("/auth")
 @ApplicationScoped
 public class AuthResource {
 
-  private static final String CREDENTIALS_ERROR = "The credentials are incorrect";
+  private static final String CREDENTIALS_ERROR =
+      "The credentials are incorrect"; // Error message returned to the application server
   private final UserService userService;
 
   @Inject
@@ -30,38 +31,43 @@ public class AuthResource {
   }
 
   /**
-   * @param receivedUser
-   * @return
+   * Method allowing to treat requests from the application server when a member tries to log in
+   *
+   * @param userLoggingIn User trying to log in
+   * @return Response depending on whether the member was able to log in or not
    */
   @POST
   @Path("/login")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response verifyLogin(User receivedUser) {
+  public Response verifyLogin(User userLoggingIn) {
 
     ObjectNode responseBody = JsonNodeFactory.instance.objectNode();
 
     // Check if the user exists in the database
-    if (userService.getUser(receivedUser.getUsername()).isPresent()) {
+    if (userService.getUser(userLoggingIn.getUsername()).isPresent()) {
 
-      User userLoggingIn = userService.getUser(receivedUser.getUsername()).get();
+      User userFromDB =
+          userService
+              .getUser(userLoggingIn.getUsername())
+              .get(); // User retrieved in DB according to the username
 
       // Check if the hashes match
-      if (BcryptUtil.matches(receivedUser.getPassword(), userLoggingIn.getPassword())) {
+      if (BcryptUtil.matches(userLoggingIn.getPassword(), userFromDB.getPassword())) {
 
         // Creation of the JWT
         String jwt =
             Jwt.issuer("AMT-AuthService")
-                .groups(userLoggingIn.getRole().toString())
+                .groups(userFromDB.getRole().toString())
                 .jws()
-                .algorithm(SignatureAlgorithm.ES256)
+                .algorithm(SignatureAlgorithm.ES256) // Signing the JWT with ES256 algorithm
                 .sign();
 
         responseBody.put("token", jwt);
         responseBody
             .putObject("account")
-            .put("username", userLoggingIn.getUsername())
-            .put("role", userLoggingIn.getRole().toString());
+            .put("username", userFromDB.getUsername())
+            .put("role", userFromDB.getRole().toString());
         return Response.status(Response.Status.OK).entity(responseBody).build();
       }
     }

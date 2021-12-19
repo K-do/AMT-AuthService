@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import org.jdbi.v3.core.Jdbi;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
 
-/** */
+/** Class allowing to make requests in the table User in the database */
 @ApplicationScoped
 public class UserService {
 
@@ -37,7 +37,11 @@ public class UserService {
               handle
                   .createUpdate(ResourceLoader.loadResource("sql/user/add.sql"))
                   .bind("username", user.getUsername())
-                  .bind("password", BcryptUtil.bcryptHash(user.getPassword()))
+                  .bind(
+                      "password",
+                      BcryptUtil.bcryptHash(
+                          user.getPassword())) // Hashes password with BCrypt algorithm before
+                  // putting it in the DB
                   .bind("role", user.getRole())
                   .execute());
     } catch (UnableToExecuteStatementException e) {
@@ -50,7 +54,7 @@ public class UserService {
    * Get a user from the database
    *
    * @param username the username of the user
-   * @return an optional. Contains the user if it exists
+   * @return an Optional. Contains the user if it exists
    */
   public Optional<User> getUser(String username) {
     return jdbi.withHandle(

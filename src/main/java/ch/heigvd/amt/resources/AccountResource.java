@@ -14,7 +14,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/** */
+/** Class managing accounts creation related route */
 @Path("/accounts")
 @ApplicationScoped
 public class AccountResource {
@@ -33,25 +33,32 @@ public class AccountResource {
   }
 
   /**
-   * @param receivedUser
-   * @return
+   * Method to create a new account
+   *
+   * @param userSigningUp user trying to create an account
+   * @return a response body with a status code
    */
   @POST
   @Path("/register")
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response createNewAccount(User receivedUser) {
+  public Response createNewAccount(User userSigningUp) {
 
+    // Starts to create the response body
     ObjectNode responseBody = JsonNodeFactory.instance.objectNode();
 
-    if (receivedUser
+    // Controls restriction with the password. If it doesn't match, the response body will contain
+    // an error
+    if (userSigningUp
         .getPassword()
         .matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,}$")) {
 
-      if (userService.addUser(receivedUser).getStatus() == UpdateStatus.SUCCESS) {
-
-        responseBody.put("username", receivedUser.getUsername());
-        responseBody.put("role", receivedUser.getRole().toString());
+      // If the user is successfully created, the response body will contain the username and the
+      // role. If not, it
+      // will contain an error
+      if (userService.addUser(userSigningUp).getStatus() == UpdateStatus.SUCCESS) {
+        responseBody.put("username", userSigningUp.getUsername());
+        responseBody.put("role", userSigningUp.getRole().toString());
         return Response.status(Response.Status.CREATED).entity(responseBody).build();
       } else {
         responseBody.put("error", USER_ERROR);
@@ -65,7 +72,6 @@ public class AccountResource {
                   .objectNode()
                   .put("property", "password")
                   .put("message", PASSWORD_ERROR));
-
       return Response.status(Response.Status.BAD_REQUEST).entity(responseBody).build();
     }
   }

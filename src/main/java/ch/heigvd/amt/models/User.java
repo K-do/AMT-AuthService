@@ -2,8 +2,10 @@ package ch.heigvd.amt.models;
 
 import java.beans.ConstructorProperties;
 
+/** Class representing a user composed of a username, a password and a role */
 public class User {
 
+  /** Enum with possible user roles */
   public enum Role {
     MEMBER,
     ADMIN
