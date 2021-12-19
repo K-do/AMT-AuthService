@@ -1,6 +1,6 @@
 # Les Boulangers - Authentication Server
 
-Dans le cadre du projet du cours AMT (Application multi-tiers) à la HEIG-VD, nous sommes chargés de créer un site web de e-commerce décomposé en microservices. Dont ce microservice est celui d'authentification.
+Dans le cadre du projet du cours AMT (Application multi-tiers) à la HEIG-VD, nous sommes chargés de créer un site web de e-commerce décomposé en microservices. Dont ce microservice qui est celui d'authentification.
 
 ## Description
 
@@ -15,7 +15,18 @@ Ce microservice d'authentification est également basé sur Quarkus.
 ## Déploiement (A MODIFIER)
 
 - Télécharger la release et l'extraire. Ajouter les données de connexion à la base de données dans le fichier `config/application.properties` (il peut être nécessaire de le créer).
-- Lancer le serveur avec `java -jar target/quarkus-app/quarkus-run.jar` 
+
+- Créer la paire de clés publique/privée avec les commandes `openssl` ci-dessous :
+
+  ```
+  openssl ecparam -genkey -name prime256v1 -noout -out ec256-key-pair.pem
+  openssl ec -in ec256-key-pair.pem -pubout -out publicKey.pem
+  openssl pkcs8 -topk8 -nocrypt -inform pem -in ec256-key-pair.pem -outform pem -out privateKey.pem
+  ```
+
+  La clé nommée `ec256-key-pair.pem` peut être supprimée ou cachée.
+
+- Lancer le serveur avec `java -jar target/quarkus-auth/quarkus-run.jar` 
 
 
 ## Installation (A MODIFIER)
@@ -28,7 +39,7 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
 
    - Standalone
 
-   Si vous disposez déjà de postgres, vous pouvez créez une nouvelle base de données ou en utiliser une existante. Les scripts pour créer les tables se trouvent dans `sql/tables`. 
+   Si vous disposez déjà de postgres, vous pouvez créer une nouvelle base de données ou en utiliser une existante. Les scripts pour créer les tables se trouvent dans `sql/tables`. 
 
    Une fois la configuration terminée, vous pouvez mettre les informations de connexions dans le fichier `config/application.properties`. (L'utilisateur à fournir doit avoir des droits de lecture et d'écriture)
 
@@ -36,9 +47,19 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
      1. `docker-compose up` dans le dossier `docker`
      2. Se connecter à la base de données et exécuter les scripts se trouvant dans  `sql/tables`.
 
-3. Lancer l'application en mode *dev* avec `mvn compile quarkus:dev`.
+3. Créer la paire de clés publique/privée avec les commandes `openssl` ci-dessous :
 
-4. Se connecter avec un navigateur à sur localhost:8080. La page d’accueil retourne un 404 avec la liste des routes.
+   ```
+   openssl ecparam -genkey -name prime256v1 -noout -out ec256-key-pair.pem
+   openssl ec -in ec256-key-pair.pem -pubout -out publicKey.pem
+   openssl pkcs8 -topk8 -nocrypt -inform pem -in ec256-key-pair.pem -outform pem -out privateKey.pem
+   ```
+
+   Cela va permettre signer le JWT avec l'algorithme ES256.
+
+   La clé nommée `ec256-key-pair.pem` peut être supprimée ou cachée.
+
+4. Lancer l'application en mode *dev* avec `mvn compile quarkus:dev`.
 
 
 ## Contribution
