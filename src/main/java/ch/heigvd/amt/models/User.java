@@ -1,45 +1,54 @@
 package ch.heigvd.amt.models;
 
-import org.jdbi.v3.core.mapper.Nested;
-
 import java.beans.ConstructorProperties;
 
+/** Class representing a user composed of a username, a password and a role */
 public class User {
 
-    enum Role {
-        MEMBER, ADMIN
-    }
+  /** Enum with possible user roles */
+  public enum Role {
+    MEMBER,
+    ADMIN
+  }
 
-    private final String username;
-    private final String password;
-    private final Role role;
+  private final String username;
+  private final String password;
+  private Role role;
 
-    @ConstructorProperties({"username", "password", "role"})
-    public User(String username, String password, @Nested("role") Role role) {
-        this.username = username;
-        this.password = password;
-        this.role = role;
-    }
+  @ConstructorProperties({"username", "password", "role"})
+  public User(String username, String password, Role role) {
+    this.username = username;
+    this.password = password;
+    this.role = role;
+  }
 
-    public String getUsername() {
-        return username;
-    }
+  public String getUsername() {
+    return username;
+  }
 
-    public String getPassword() {
-        return password;
-    }
+  public String getPassword() {
+    return password;
+  }
 
-    public Role getRole() {
-        return role;
-    }
+  public Role getRole() {
+    return role;
+  }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", role=" + role +
-                '}';
-    }
+  public void setRole(Role role) {
+    this.role = role;
+  }
 
+  @Override
+  public String toString() {
+    return "User{"
+        + "username='"
+        + username
+        + '\''
+        + ", password='"
+        + password
+        + '\''
+        + ", role="
+        + role
+        + '}';
+  }
 }
