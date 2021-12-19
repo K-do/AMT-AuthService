@@ -28,7 +28,7 @@ Ce microservice d'authentification est également basé sur Quarkus.
 
   La clé nommée `ec256-key-pair.pem` peut être supprimée ou cachée.
 
-- Lancer le serveur avec `java -jar target/quarkus-auth/quarkus-run.jar` 
+- Lancer le serveur avec `java -jar target/quarkus-app/quarkus-run.jar` 
 
 
 ## Installation
