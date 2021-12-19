@@ -13,17 +13,13 @@ public class User {
 
   private final String username;
   private final String password;
-  private final Role role;
+  private Role role;
 
+  @ConstructorProperties({"username", "password", "role"})
   public User(String username, String password, Role role) {
     this.username = username;
     this.password = password;
     this.role = role;
-  }
-
-  @ConstructorProperties({"username", "password"})
-  public User(String username, String password) {
-    this(username, password, Role.MEMBER);
   }
 
   public String getUsername() {
@@ -36,6 +32,10 @@ public class User {
 
   public Role getRole() {
     return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
   }
 
   @Override

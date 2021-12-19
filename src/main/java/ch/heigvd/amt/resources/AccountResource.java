@@ -53,6 +53,9 @@ public class AccountResource {
         .getPassword()
         .matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[#$^+=!*()@%&]).{8,}$")) {
 
+      // Give the base role to the user
+      userSigningUp.setRole(User.Role.MEMBER);
+
       // If the user is successfully created, the response body will contain the username and the
       // role. If not, it
       // will contain an error

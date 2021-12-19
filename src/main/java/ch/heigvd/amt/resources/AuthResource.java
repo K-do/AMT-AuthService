@@ -58,6 +58,7 @@ public class AuthResource {
         // Creation of the JWT
         String jwt =
             Jwt.issuer("AMT-AuthService")
+                .subject(userFromDB.getUsername())
                 .groups(userFromDB.getRole().toString())
                 .jws()
                 .algorithm(SignatureAlgorithm.ES256) // Signing the JWT with ES256 algorithm
