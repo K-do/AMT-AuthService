@@ -41,13 +41,13 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
 
    - Standalone
 
-   Si vous disposez déjà de postgres, vous pouvez créer une nouvelle base de données ou en utiliser une existante. Les scripts pour créer les tables se trouvent dans `sql/tables`. 
+   Si vous disposez déjà de postgres, vous pouvez créer une nouvelle base de données ou en utiliser une existante. La base de données est configurée automatiquement au lancement du projet grâce à Liquibase.
 
    Une fois la configuration terminée, vous pouvez mettre les informations de connexions dans le fichier `config/application.properties`. (L'utilisateur à fournir doit avoir des droits de lecture et d'écriture)
 
    - Docker
      1. `docker-compose up` dans le dossier `docker`
-     2. Se connecter à la base de données et exécuter les scripts se trouvant dans  `sql/tables`.
+     2. Se connecter à la base de données dans l'IDE
 
 3. Générer la paire de clés publique/privée avec les commandes `openssl` ci-dessous :
 
