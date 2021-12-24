@@ -5,7 +5,6 @@ import ch.heigvd.amt.database.UpdateStatus;
 import ch.heigvd.amt.models.User;
 import ch.heigvd.amt.services.UserService;
 import database.PostgisResource;
-import groovy.transform.Undefined;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
 import org.jdbi.v3.core.statement.UnableToExecuteStatementException;
@@ -20,9 +19,6 @@ import java.util.Optional;
 @QuarkusTest
 @QuarkusTestResource(PostgisResource.class)
 public class UserServiceTest {
-
-    private static final String EXCEPTION_MESSAGE = "org.postgresql.util.PSQLException: ERROR: null value in column \"role\" of relation \"user\" violates not-null constraint\n" +
-            "  Détail : Failing row contains (unit-test-admin-2, $2a$10$jjsm5x/8PXdRP1EhdtbPf.1Vc6KzprQ1dee5eRC9ZNJYEdarUT3Ka, null).";
 
     @Inject
     DataSource dataSource;
