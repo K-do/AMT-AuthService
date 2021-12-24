@@ -1,6 +1,7 @@
 package ch.heigvd.amt.models;
 
 import java.beans.ConstructorProperties;
+import java.util.Objects;
 
 /** Class representing a user composed of a username, a password and a role */
 public class User {
@@ -15,11 +16,21 @@ public class User {
   private final String password;
   private Role role;
 
+  /**
+   * Constructor allowing to create a new user
+   * @param username username of the user
+   * @param password plaintext password of the user
+   * @param role role of the user
+   */
   @ConstructorProperties({"username", "password", "role"})
   public User(String username, String password, Role role) {
+
+    Objects.requireNonNull(username);
+    Objects.requireNonNull(password);
+
     this.username = username;
     this.password = password;
-    this.role = role;
+    this.role = role; // Is null when a user creates a new account from the application service, but it has to be set !
   }
 
   public String getUsername() {
@@ -35,6 +46,7 @@ public class User {
   }
 
   public void setRole(Role role) {
+    Objects.requireNonNull(role);
     this.role = role;
   }
 
