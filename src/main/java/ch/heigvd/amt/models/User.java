@@ -18,6 +18,7 @@ public class User {
 
   /**
    * Constructor allowing to create a new user
+   *
    * @param username username of the user
    * @param password plaintext password of the user
    * @param role role of the user
@@ -30,7 +31,9 @@ public class User {
 
     this.username = username;
     this.password = password;
-    this.role = role; // Is null when a user creates a new account from the application service, but it has to be set !
+    this.role =
+        role; // Is null when a user creates a new account from the application service, but it has
+    // to be set !
   }
 
   public String getUsername() {

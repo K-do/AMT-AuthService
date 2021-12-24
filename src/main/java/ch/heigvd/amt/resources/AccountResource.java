@@ -51,7 +51,8 @@ public class AccountResource {
     // an error
     if (userSigningUp
         .getPassword()
-        .matches("^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[§\\]°\\-`´\\[¬{}_£€<>#$^+=!?*()@%&|¦ç/'\"¢~:;,.¨]).{8,}$")) {
+        .matches(
+            "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[§\\]°\\-`´\\[¬{}_£€<>#$^+=!?*()@%&|¦ç/'\"¢~:;,.¨]).{8,}$")) {
 
       // Give the base role to the user
       userSigningUp.setRole(User.Role.MEMBER);

@@ -2,14 +2,13 @@ package database;
 
 import ch.heigvd.amt.utils.ResourceLoader;
 import io.quarkus.test.common.QuarkusTestResourceLifecycleManager;
+import java.util.HashMap;
+import java.util.Map;
+import javax.sql.DataSource;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
-
-import javax.sql.DataSource;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PostgisResource implements QuarkusTestResourceLifecycleManager {
 
