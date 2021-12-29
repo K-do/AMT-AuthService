@@ -19,11 +19,14 @@ import javax.ws.rs.core.Response;
 @ApplicationScoped
 public class AccountResource {
 
-  private static final String PASSWORD_ERROR =
-      "The password does not match the security politics, "
+  public static final String PASSWORD_POLICY_REGEX =
+      "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[§\\]°\\-`´\\[¬{}_£€<>#$^+=!?*()@%&|¦ç/'\"¢~:;,.¨]).{8,}$";
+
+  public static final String PASSWORD_ERROR =
+      "The password does not match the security policy, "
           + "it should be at least 8 char long, should contain at least one uppercase char, one lowercase char, "
           + "one digit and one special character";
-  private static final String USER_ERROR = "The username already exist";
+  public static final String USER_ERROR = "The username already exist";
 
   private final UserService userService;
 
@@ -49,10 +52,7 @@ public class AccountResource {
 
     // Controls restriction with the password. If it doesn't match, the response body will contain
     // an error
-    if (userSigningUp
-        .getPassword()
-        .matches(
-            "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[§\\]°\\-`´\\[¬{}_£€<>#$^+=!?*()@%&|¦ç/'\"¢~:;,.¨]).{8,}$")) {
+    if (userSigningUp.getPassword().matches(PASSWORD_POLICY_REGEX)) {
 
       // Give the base role to the user
       userSigningUp.setRole(User.Role.MEMBER);

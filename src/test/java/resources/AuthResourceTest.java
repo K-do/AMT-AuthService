@@ -4,6 +4,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.*;
 
 import ch.heigvd.amt.models.User;
+import ch.heigvd.amt.resources.AuthResource;
 import database.PostgisResource;
 import io.quarkus.test.common.QuarkusTestResource;
 import io.quarkus.test.junit.QuarkusTest;
@@ -67,7 +68,7 @@ public class AuthResourceTest {
         .and()
         .contentType(ContentType.JSON)
         .and()
-        .body("error", equalTo("The credentials are incorrect"));
+        .body("error", equalTo(AuthResource.CREDENTIALS_ERROR));
   }
 
   @Test
@@ -85,7 +86,7 @@ public class AuthResourceTest {
         .and()
         .contentType(ContentType.JSON)
         .and()
-        .body("error", equalTo("The credentials are incorrect"));
+        .body("error", equalTo(AuthResource.CREDENTIALS_ERROR));
   }
 
   @Test
