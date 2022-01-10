@@ -11,6 +11,14 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Copy keys
+        working-directory: .
+        shell: bash
+        env: 
+          PRIVATE_KEY: ${{ secrets.PRIVATEKEY }}
+          PUBLIC_KEY: ${{ secrets.PUBLICKEY }}
+        run: 
+          echo "$PRIVATE_KEY" > privateKey.pem && echo "$PUBLIC_KEY" > publicKey.pem
       - name: Install the dependencies
         working-directory: .
         run: mvn clean install -DskipTests=true

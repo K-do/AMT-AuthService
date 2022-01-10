@@ -21,7 +21,7 @@ import javax.ws.rs.core.Response;
 @ApplicationScoped
 public class AuthResource {
 
-  private static final String CREDENTIALS_ERROR =
+  public static final String CREDENTIALS_ERROR =
       "The credentials are incorrect"; // Error message returned to the application server
   private final UserService userService;
 
