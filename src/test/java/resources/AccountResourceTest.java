@@ -109,6 +109,7 @@ public class AccountResourceTest {
     int minLength = 8, maxLength = 32; // length min and max of the password
     String password;
 
+    // so that the generated password always matches the regex
     do {
       password =
           RandomStringUtils.random(
