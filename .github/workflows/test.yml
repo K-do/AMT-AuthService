@@ -11,6 +11,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: Copy keys
+        run: echo ${{ secrets.PRIVATEKEY }} > privateKey.pem && echo ${{ secrets.PUBLICKEY }} > publicKey.pem
       - name: Install the dependencies
         working-directory: .
         run: mvn clean install -DskipTests=true
