@@ -8,8 +8,12 @@
             <column name="username" type="text">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="password" type="text"/>
-            <column name="role" type="Role"/>
+            <column name="password" type="text">
+                <constraints nullable="false"/>
+            </column>
+            <column name="role" type="Role">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>

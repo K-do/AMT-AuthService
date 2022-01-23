@@ -68,6 +68,7 @@ Les étapes ci-dessous permettent de mettre en place l'environnement de dévelop
    La clé nommée `ec256-key-pair.pem` peut être supprimée ou cachée.
 
 4. Lancer l'application en mode *dev* avec `mvn compile quarkus:dev`.
+5. Un admin par défaut est crée avec le nom `admin` et le mot de passe `123`.
 
 
 ## Contribution
